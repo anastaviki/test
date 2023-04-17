@@ -6,9 +6,9 @@ pipeline {
                 echo 'Hello World!'
             }
         }
-		stage('Clone repository') {
+		stage('Install dependencies') {
             steps {
-                git branch: 'develop', url: 'https://github.com/anastaviki/test'
+                sh 'pip install -r requirements.txt'
             }
         }
     }
