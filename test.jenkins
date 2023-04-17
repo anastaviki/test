@@ -30,5 +30,11 @@ pipeline {
                 sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py --html=report.html '
             }
         }
+		
+		stage('Run Robot Framework Tests') {
+            steps {
+                sh 'robot -d reports/ RobotFramework_HW/RF_Tests/tests/'
+            }
+        }
     }
 }
