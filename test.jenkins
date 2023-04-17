@@ -1,15 +1,19 @@
 pipeline {
     agent any
+    tools {
+        // Name of the JDK installation defined in Jenkins
+        jdk 'JDK8'
+    }
     stages {
         stage('Install Python') {
-            // Install Python and set it as the default version
-            tools {
-                // Name of the Python installation defined in Jenkins
-                python 'Python3.9.0'
-            }
             steps {
+                // Download and install Python 3.9.0
+                sh 'wget https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz'
+                sh 'tar xzf Python-3.9.0.tgz'
+                sh 'cd Python-3.9.0 && ./configure && make && sudo make install'
+                
                 // Verify that the correct version of Python is installed
-                sh 'python --version'
+                sh 'python3 --version'
             }
         }
     }
