@@ -4,10 +4,7 @@ pipeline {
         git 'my-git'
     }
     stages {
-	 stage('Ex') {
-            steps {
-                withEnv(["PATH+FOO=${tool 'my-git'}/bin"]) 
-            }
+	
 	stage('Checkout') {
             steps {
                 git branch: 'develop', url: 'https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git'
