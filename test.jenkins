@@ -27,7 +27,7 @@ pipeline {
 
 		 stage('Run Pytest') {
             steps {
-                sh 'pytest PyTest_HW/PyTest/'
+                sh 'python -m pytest PyTest_HW/PyTest/test_cases.py'
             }
         }
     }
