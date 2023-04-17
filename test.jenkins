@@ -13,7 +13,7 @@ pipeline {
         }
 	stage('Checkout') {
             steps {
-                git branch: 'develop', url: 'https://github.com/anastaviki/test.git'
+                git branch: 'main', url: 'https://github.com/anastaviki/test.git'
             }
         }
         stage('Hello') {
