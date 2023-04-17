@@ -29,7 +29,10 @@ pipeline {
 
 		 stage('Run Pytest') {
             steps {
-                sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py --html=report.html '
+			withEnv(['/var/jenkins_home/.local/lib/python3.9/site-packages']) {
+                    sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py --html=report.html '
+                }
+                
             }
         }
 		
