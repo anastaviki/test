@@ -17,11 +17,6 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/anastaviki/test.git'
             }
         }
-        stage('Hello') {
-            steps {
-                echo 'Hello World!'
-            }
-        }
 		stage('Install dependencies') {
             steps {
                 sh 'pip3 install -r requirements.txt'
