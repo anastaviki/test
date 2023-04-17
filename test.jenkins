@@ -14,7 +14,7 @@ pipeline {
         }
 	stage('Inst') {
             steps {
-                sh 'pip3 install robotframework'
+                sh 'sudo pip3 install robotframework'
             }
         }
 	stage('Checkout') {
