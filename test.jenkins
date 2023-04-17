@@ -23,25 +23,21 @@ pipeline {
             steps {
 			
                 sh 'pip3 install robotframework'
+				sh 'pip3 list'
             }
         }
 		
 
 		 stage('Run Pytest') {
             steps {
-			withEnv(['/var/jenkins_home/.local/lib/python3.9/site-packages']) {
-                    sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py --html=report.html '
-                }
-                
+                sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py --html=report.html '
             }
         }
 		
 		stage('Run Robot Framework Tests') {
             steps {
-			withEnv(['/var/jenkins_home/.local/lib/python3.9/site-packages']) {
-                    sh 'robot -d reports/ RobotFramework_HW/RF_Tests/tests/'
-                }
-                
+			
+                sh 'robot -d reports/ RobotFramework_HW/RF_Tests/tests/'
             }
         }
     }
