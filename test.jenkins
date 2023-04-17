@@ -5,8 +5,7 @@ pipeline {
         jdk 'JDK8'
     }
     stages {
-        stage ('tst'){
-        steps {sh 'echo"tst"' }}
+
         stage('Install Python') {
             steps {
                 // Download and install Python 3.9.0
