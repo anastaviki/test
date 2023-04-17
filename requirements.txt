@@ -1,0 +1,7 @@
+pytest
+pyodbc
+pytest-html
+loggin
+robotframework
+pymssql
+robotframework-databaselibrary
