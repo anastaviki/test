@@ -8,13 +8,18 @@ pipeline {
             steps {
                 withEnv(["PATH+FOO=${tool 'my-git'}/bin"]) {
                     sh 'echo $PATH'
-					sh 'pip show <package-name>'
+					
                 }
             }
         }
 	stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/anastaviki/test.git'
+            }
+        }
+        stage('Hello') {
+            steps {
+                sh 'pip show <package-name>'
             }
         }
 		stage('Install dependencies') {
