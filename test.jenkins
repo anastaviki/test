@@ -7,10 +7,8 @@ pipeline {
 
 	stage('Inst') {
             steps {
-                sh """
-    export PYTHONPATH=$(pip3 show pip | awk '/^Location: /{print \$2}' | sed 's/Location: //g')
-    echo \$PYTHONPATH
-"""
+                sh 'export PYTHONPATH=$(pip3 show pip | awk "/^Location: /{print \$2}" | sed "s/Location: //g")'
+     sh 'echo \$PYTHONPATH'
             }
         }
 	stage('Checkout') {
