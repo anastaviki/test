@@ -5,6 +5,7 @@ pipeline {
             // Name of the Python installation defined in Jenkins
             python 'Python3.9.0'
         }
+        }
     stages {
         stage('Hello') {
             steps {
