@@ -7,7 +7,7 @@ pipeline {
 
 	stage('Inst') {
             steps {
-                sh 'pip3 -V'
+                sh 'pip3 show pip | grep Location | awk '{print $2}''
             }
         }
 	stage('Checkout') {
