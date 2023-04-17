@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        // Install Python and set it as the default version
+        tools {
+            // Name of the Python installation defined in Jenkins
+            python 'Python3.9.0'
+        }
     stages {
         stage('Hello') {
             steps {
