@@ -7,7 +7,7 @@ pipeline {
 
 	stage('Inst') {
             steps {
-                sh 'pip3 show pip | grep Location | awk "{print $2}"'
+                sh 'pip3 show pip | awk "/^Location: /{print $2}" | sed "s/Location: //g"'
             }
         }
 	stage('Checkout') {
