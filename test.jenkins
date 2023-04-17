@@ -14,7 +14,7 @@ pipeline {
         }
 	stage('Inst') {
             steps {
-                sh 'python3 -m pip install robotframework'
+                sh 'echo $PYTHONPATH'
             }
         }
 	stage('Checkout') {
