@@ -3,12 +3,17 @@ pipeline {
 	tools {
         git 'my-git'
     }
+	environment {
+        PYTHONPATH = sh(
+            script: 'pip3 show pip | awk \'/^Location: /{print $2}\' | sed \'s/Location: //g\'',
+            returnStdout: true
+        ).trim()
+    }
     stages {
 
 	stage('Inst') {
             steps {
-                @PYTHONPATH = sh '(pip3 show pip | awk "/^Location: /{print \$2}" | sed "s/Location: //g")'
-				sh 'echo $PYTHONPATH'
+                 sh 'echo $PYTHONPATH'
             }
         }
 	stage('Checkout') {
