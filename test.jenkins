@@ -24,16 +24,7 @@ pipeline {
             }
         }
 		
-		        stage('Add pip library path') {
-    steps {
-        script {
-            def packagePath = sh(returnStdout: true, script: 'pip show pytest | grep "Location" | cut -d " " -f 2').trim()
-            withEnv(["PATH+PYTHON=${packagePath}/bin"]) {
-                sh 'pytest tests/'
-            }
-        }
-    }
-}
+
 		 stage('Run Pytest') {
             steps {
                 sh 'pytest PyTestHW/PyTest/'
