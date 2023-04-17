@@ -6,9 +6,7 @@ pipeline {
     stages {
 	 stage('Ex') {
             steps {
-                withEnv(["PATH+FOO=${tool 'my-git'}/bin"]) {
-                    sh 'echo $PATH'
-                }
+                withEnv(["PATH+FOO=${tool 'my-git'}/bin"]) 
             }
 	stage('Checkout') {
             steps {
