@@ -8,7 +8,7 @@ pipeline {
         }
 		stage('Clone repository') {
             steps {
-                git branch: 'develop', url: 'https://github.com/anastaviki/test.git'
+                git branch: 'develop', url: 'https://github.com/anastaviki/test'
             }
         }
     }
