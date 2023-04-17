@@ -27,7 +27,7 @@ pipeline {
 
 		 stage('Run Pytest') {
             steps {
-                sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py'
+                sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py --html=report.html '
             }
         }
     }
