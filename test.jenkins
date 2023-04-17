@@ -5,7 +5,7 @@ pipeline {
     }
 	environment {
         PYTHONPATH = sh(
-            script: 'pip3 show pip | awk \'/^Location: /{print $2}\' | sed \'s/Location: //g\'',
+            script: 'pip3 show pytest | awk \'/^Location: /{print $2}\' | sed \'s/Location: //g\'',
             returnStdout: true
         ).trim()
     }
