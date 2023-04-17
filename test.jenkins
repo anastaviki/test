@@ -6,14 +6,14 @@ pipeline {
     stages {
 	stage('Example') {
             steps {
-                withEnv(["PATH+FOO=${tool 'my-tool'}/bin"]) {
+                withEnv(["PATH+FOO=${tool 'my-git'}/bin"]) {
                     sh 'echo $PATH'
                 }
             }
         }
 	stage('Checkout') {
             steps {
-                git branch: 'develop', url: 'https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git'
+                git branch: 'develop', url: 'https://github.com/anastaviki/test.git'
             }
         }
         stage('Hello') {
