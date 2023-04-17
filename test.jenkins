@@ -21,6 +21,7 @@ pipeline {
 
 		stage('Install dependencies') {
             steps {
+			
                 sh 'pip3 install robotframework'
             }
         }
@@ -34,7 +35,10 @@ pipeline {
 		
 		stage('Run Robot Framework Tests') {
             steps {
-                sh 'robot -d reports/ RobotFramework_HW/RF_Tests/tests/'
+			withEnv(['/var/jenkins_home/.local/lib/python3.9/site-packages']) {
+                    sh 'robot -d reports/ RobotFramework_HW/RF_Tests/tests/'
+                }
+                
             }
         }
     }
