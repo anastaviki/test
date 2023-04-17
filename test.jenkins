@@ -14,7 +14,7 @@ pipeline {
         }
 	stage('Inst') {
             steps {
-                sh 'echo pip3 -V'
+                sh 'pip3 -V'
             }
         }
 	stage('Checkout') {
