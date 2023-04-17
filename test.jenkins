@@ -4,14 +4,7 @@ pipeline {
         git 'my-git'
     }
     stages {
-	stage('Example') {
-            steps {
-                withEnv(["PATH+FOO=${tool 'my-git'}/bin"]) {
-                    sh 'echo $PATH'
-					
-                }
-            }
-        }
+
 	stage('Inst') {
             steps {
                 sh 'pip3 -V'
