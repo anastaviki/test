@@ -16,7 +16,14 @@ pipeline {
             steps {
                 git branch: 'main', url: 'https://github.com/anastaviki/test.git'
             }
+
+		stage('Install dependencies') {
+            steps {
+                sh 'pip3 install -r requirements.txt'
+            }
         }
+		
+		        }
         stage('Add pip library path') {
     steps {
         script {
@@ -27,11 +34,6 @@ pipeline {
         }
     }
 }
-		stage('Install dependencies') {
-            steps {
-                sh 'pip3 install -r requirements.txt'
-            }
-        }
 		 stage('Run Pytest') {
             steps {
                 sh 'pytest PyTestHW/PyTest/'
