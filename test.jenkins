@@ -8,7 +8,7 @@ pipeline {
             steps {
                 withEnv(["PATH+FOO=${tool 'my-git'}/bin"]) {
                     sh 'echo $PATH'
-					sh 'echo $PYTHONPATH'
+					sh 'pip show <package-name>'
                 }
             }
         }
