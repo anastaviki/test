@@ -2,7 +2,7 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-import pyodbc
+import pymssql
 import pytest
 import datetime
 import logging
@@ -14,10 +14,9 @@ def db_conn():  # connection to db
     database = 'AdventureWorks2012'
     username = 'test_user'
     password = 'test_user'
-    conn_str = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};" \
-               f"DATABASE={database};UID={username};PWD={password}"
     # Create a connection object
-    conn = pyodbc.connect(conn_str)
+    #conn = pymssql.connect(server, username, password, database)
+    conn = pymssql.connect(server=server, database=database, user=username, password=password)
     yield conn
     conn.close()
 
