@@ -4,10 +4,7 @@ pipeline {
         git 'my-git'
     }
 	environment {
-        PYTHONPATH = sh(
-            script: 'pip3 show pytest | awk \'/^Location: /{print $2}\' | sed \'s/Location: //g\'',
-            returnStdout: true
-        ).trim()
+        PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
 
