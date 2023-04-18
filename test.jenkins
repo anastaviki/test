@@ -15,17 +15,20 @@ pipeline {
         
         stage('Check for pull requests') {
             steps {
-                sh 'git fetch origin'
-                sh 'git checkout develop'
-                sh 'git pull'
-                def branches = sh(returnStdout: true, script: "git branch -r --no-merged origin/develop | grep -v HEAD | awk '{print \$1}'")
-                if (branches.trim().length() == 0) {
-                    error 'No pull requests found from feature branches to develop branch'
-                } else {
-                    echo "Found pull requests from the following feature branches: ${branches}"
+                script {
+                    sh 'git fetch origin'
+                    sh 'git checkout develop'
+                    sh 'git pull'
+                    def branches = sh(returnStdout: true, script: "git branch -r --no-merged origin/develop | grep -v HEAD | awk '{print \$1}'")
+                    if (branches.trim().length() == 0) {
+                        error 'No pull requests found from feature branches to develop branch'
+                    } else {
+                        echo "Found pull requests from the following feature branches: ${branches}"
+                    }
                 }
             }
         }
+        
 
 	stage('Inst') {
             steps {
