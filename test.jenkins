@@ -13,7 +13,8 @@ pipeline {
                 sh 'git fetch origin'
                 sh 'git checkout develop'
                 sh 'git pull'
-                def branches = sh(returnStdout: true, script: "git branch -r --no-merged origin/develop | grep -v HEAD | awk '{print \$1}'")
+                def branches = sh(returnStdout: true, script: 'git branch -r --no-merged origin/develop | grep -v HEAD | awk \'{print $1}\'').trim()
+
                 if (branches.trim().length() == 0) {
                     error 'No pull requests found from feature branches to develop branch'
                 } else {
