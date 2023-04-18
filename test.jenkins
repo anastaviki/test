@@ -7,6 +7,21 @@ pipeline {
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
+	stage('Check Pull Requests') {
+  steps {
+    script {
+      def prs = git.pollChanges().findAll {
+        it.getBranches().any { branch ->
+          branch.name.contains('pull') && branch.name.contains('/feature-')
+        }
+      }
+      if (prs.isEmpty()) {
+        currentBuild.result = 'ABORTED'
+        error('No pull requests found')
+      }
+    }
+  }
+}
 
 	stage('Inst') {
             steps {
