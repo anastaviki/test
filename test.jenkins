@@ -16,7 +16,7 @@ pipeline {
                 url: apiUrl,
             )
             def pullRequests = readJSON(text: response.getContent())
-            
+            echo pullRequests
             if (pullRequests.size() > 0) {
                 // There are open pull requests, proceed with the build steps
                 // ...
