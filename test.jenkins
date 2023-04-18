@@ -7,22 +7,18 @@ pipeline {
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
-	stage('Check Pull Requests') {
+	  stage('Check Pull Requests') {
             steps {
                 script {
-                    def prs = git poll: true, branches: [[name: 'refs/pull/*/head']], changelog: false, showRevision: true, quiet: true, remote: 'origin'
+                    def prs = git branch: 'develop', url: 'https://github.com/anastaviki/test.git', 
+                        changelog: true, poll: true, 
+                        branchFilter: 'origin/(pull/*)/feature-*'
                     if (prs.isEmpty()) {
-                        currentBuild.result = 'ABORTED'
                         error('No pull requests found')
-                    } else {
-                        prs.each { pr ->
-                            echo "Pull request found: ${pr.getRevision()}"
-                        }
                     }
                 }
             }
         }
-
 
 	stage('Inst') {
             steps {
