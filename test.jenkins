@@ -15,6 +15,7 @@ pipeline {
                         branchFilter: 'origin/(pull/*)/feature-*'
                     if (prs.isEmpty()) {
                         error('No pull requests found')
+						currentBuild.result = 'ABORTED'
                     }
                 }
             }
