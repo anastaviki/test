@@ -7,17 +7,23 @@ pipeline {
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
-	  stage('Check for Pull Requests') {
-            when {
-                expression {
-                    def prs = checkout scm.withPolling(60) {
-                        sh "git ls-remote --heads origin 'pull/*/head:refs/remotes/origin/pr/*'"
-                    }
-                    return prs.trim().length() > 0
-                }
-            }
+	stage('Fetch develop branch') {
             steps {
-                echo 'There are pull requests to the develop branch from this feature branch'
+                git branch: 'develop', url: 'https://github.com/anastaviki/test.git'
+            }
+        }
+        
+        stage('Check for pull requests') {
+            steps {
+                sh 'git fetch origin'
+                sh 'git checkout develop'
+                sh 'git pull'
+                def branches = sh(returnStdout: true, script: "git branch -r --no-merged origin/develop | grep -v HEAD | awk '{print \$1}'")
+                if (branches.trim().length() == 0) {
+                    error 'No pull requests found from feature branches to develop branch'
+                } else {
+                    echo "Found pull requests from the following feature branches: ${branches}"
+                }
             }
         }
 
