@@ -8,6 +8,7 @@ pipeline {
     }
     stages {
 	  stage('Check Pull Requests') {
+	  sh 'git --version'
             steps {
                 script {
                     def prs = git branch: 'develop', url: 'https://github.com/anastaviki/test.git', 
