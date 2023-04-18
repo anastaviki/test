@@ -1,5 +1,4 @@
 pytest
-pyodbc
 pytest-html
 robotframework
 pymssql
