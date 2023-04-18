@@ -22,7 +22,7 @@ pipeline {
 		stage('Install dependencies') {
             steps {
 			
-                sh 'pip3 install robotframework'
+                
 				sh 'pip3 list'
             }
         }
