@@ -6,7 +6,8 @@ pipeline {
 	environment {
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
-  
+    stages {
+       
 
 	stage('Inst') {
             steps {
