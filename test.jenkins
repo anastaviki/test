@@ -6,19 +6,7 @@ pipeline {
 	environment {
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
-    stages {
-       stage('Check for pull requests') {
-            steps {
-                script {
-                    def gitHub = github()
-                    def prs = gitHub.api.get("/repos/${anastaviki}/${test}/pulls?state=open&base=develop")
-                    if (prs.size() == 0) {
-                        currentBuild.result = 'ABORTED'
-                        error('No pull requests found.')
-                    }
-                }
-            }
-        }
+  
 
 	stage('Inst') {
             steps {
