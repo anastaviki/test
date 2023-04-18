@@ -7,23 +7,14 @@ pipeline {
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
-      stage('Fetch develop branch') {
-            steps {
-                git branch: 'develop', url: 'https://github.com/anastaviki/test.git'
-            }
-        }
-        
-        stage('Check for pull requests') {
+       stage('Check for pull requests') {
             steps {
                 script {
-                    sh 'git fetch origin'
-                    sh 'git checkout develop'
-                    sh 'git pull'
-                    def branches = sh(returnStdout: true, script: 'git branch -r --no-merged origin/develop | grep -v HEAD | awk \'{print $1}\'').trim()
-                    if (branches.length() == 0) {
-                        error 'No pull requests found from feature branches to develop branch'
-                    } else {
-                        echo "Found pull requests from the following feature branches: ${branches}"
+                    def gitHub = github()
+                    def prs = gitHub.api.get("/repos/${anastaviki}/${test}/pulls?state=open&base=develop")
+                    if (prs.size() == 0) {
+                        currentBuild.result = 'ABORTED'
+                        error('No pull requests found.')
                     }
                 }
             }
