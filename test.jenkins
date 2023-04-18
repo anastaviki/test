@@ -7,7 +7,24 @@ pipeline {
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
-       
+       stage('Check for open pull requests') {
+    steps {
+        script {
+            def pullRequests = githubPullRequestList(
+                status: 'OPEN',
+                base: 'develop',
+                head: 'feature-*'
+            )
+
+            if (pullRequests.size() == 0) {
+                // If there are no open pull requests, skip the CD pipeline
+                echo "No open pull requests found. Skipping CD pipeline."
+                currentBuild.result = 'SUCCESS'
+                return
+            }
+        }
+    }
+}
 
 	stage('Inst') {
             steps {
