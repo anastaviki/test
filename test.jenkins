@@ -4,23 +4,26 @@ pipeline {
         git 'my-git'
     }
 	environment {
+	REPO_URL = 'https://github.com/anastaviki/test.git'
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
-       stage('Check for open pull requests') {
+       stage('Check Pull Requests') {
     steps {
         script {
-            def pullRequests = githubPullRequestList(
-                status: 'OPEN',
-                base: 'develop',
-                head: 'feature-*'
+            def apiUrl = "https://api.github.com/repos/anastaviki/test/pulls?state=open&base=develop"
+            def response = httpRequest(
+                url: apiUrl,
             )
-
-            if (pullRequests.size() == 0) {
-                // If there are no open pull requests, skip the CD pipeline
-                echo "No open pull requests found. Skipping CD pipeline."
+            def pullRequests = readJSON(text: response.getContent())
+            
+            if (pullRequests.size() > 0) {
+                // There are open pull requests, proceed with the build steps
+                // ...
+            } else {
+                // There are no open pull requests, exit the pipeline successfully
                 currentBuild.result = 'SUCCESS'
-                return
+                error("No open pull requests")
             }
         }
     }
