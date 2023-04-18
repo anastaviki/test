@@ -7,21 +7,21 @@ pipeline {
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
-	  stage('Check Pull Requests') {
-	  
-            steps {
-			sh 'git --version'
-                script {
-                    def prs = git branch: 'develop', url: 'https://github.com/anastaviki/test.git', 
-                        changelog: true, poll: true, 
-                        branchFilter: 'origin/(pull/*)/feature-*'
-                    if (prs.isEmpty()) {
-                        error('No pull requests found')
-						currentBuild.result = 'ABORTED'
-                    }
-                }
-            }
+	   stage('Check Pull Requests') {
+      steps {
+        script {
+          def git = sh(script: 'git ls-remote --refs origin "refs/pull/*/head"', returnStdout: true)
+          def pullRequests = git.split("\n").collect { it.split()[1].replace('refs/pull/', '').replace('/head', '') }.unique().findAll { it != '' }
+          def branches = sh(script: 'git ls-remote --refs origin "refs/heads/develop"', returnStdout: true).split("\n").collect { it.split()[1].replace('refs/heads/', '') }.unique()
+          def suitablePullRequests = pullRequests.findAll { branches.contains(it as String) }
+          if (suitablePullRequests.size() > 0) {
+            echo "Suitable pull request found: ${suitablePullRequests[0]}"
+          } else {
+            error "No suitable pull requests found"
+          }
         }
+      }
+    }
 
 	stage('Inst') {
             steps {
