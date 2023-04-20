@@ -60,5 +60,14 @@ pipeline {
                 sh 'python3 -m robot -d reports/ RobotFramework_HW/RF_Tests/tests/'
             }
         }
+		 stage('Move to Release Branch') {
+      steps {
+        script {
+          def date = new Date().format('yyyyMMdd')
+          sh "git checkout -b release-$date"
+          sh "git push origin release-$date"
+        }
+      }
+    }
     }
 }
