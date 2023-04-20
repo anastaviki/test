@@ -46,7 +46,7 @@ pipeline {
       steps {
         script {
           def date = new Date().format('yyyyMMdd')
-          sh "git checkout -b release-$date"
+          sh "git checkout  release-$date"
           withCredentials([usernamePassword(credentialsId: 'git_cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
   sh "git push https://$USERNAME:$PASSWORD@github.com/YOUR_USERNAME/YOUR_REPOSITORY.git release-$date"
 }
