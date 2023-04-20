@@ -20,6 +20,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/anastaviki/test.git'
 				sh 'git remote -v'
 				sh 'git config --global user.name "anastaviki"'
+				sh 'git config --global user.name'
             }
         }
 
