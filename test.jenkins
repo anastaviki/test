@@ -47,7 +47,7 @@ pipeline {
         script {
           def date = new Date().format('yyyyMMdd')
           sh "git checkout  release-$date"
-          sh "git push https://anastaviki:${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}@github.com/anastaviki/test.git release-$date"
+          sh "git push https://anastaviki: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@github.com/anastaviki/test.git release-$date"
         }
       }
     }
