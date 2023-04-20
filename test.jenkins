@@ -4,7 +4,7 @@ pipeline {
         git 'my-git'
     }
 	environment {
-	REPO_URL = 'https://github.com/anastaviki/test.git'
+
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
