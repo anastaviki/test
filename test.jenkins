@@ -8,25 +8,7 @@ pipeline {
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
-       stage('Check Pull Requests') {
-    steps {
-        script {
-            def apiUrl = "https://api.github.com/repos/anastaviki/test/pulls?state=open&base=develop&head=feature-*"
-            def response = httpRequest(
-                url: apiUrl,
-            )
-            def pullRequests = readJSON(text: response.getContent())
-            if (pullRequests.size() > 0) {
-                // There are open pull requests, proceed with the build steps
-                // ...
-            } else {
-                // There are no open pull requests, exit the pipeline successfully
-                currentBuild.result = 'SUCCESS'
-                error("No open pull requests")
-            }
-        }
-    }
-}
+
 
 	stage('Inst') {
             steps {
