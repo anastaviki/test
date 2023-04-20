@@ -48,7 +48,7 @@ pipeline {
           def date = new Date().format('yyyyMMdd')
           sh "git checkout  release-$date"
 		  def github_token = readFile("/var/jenkins_home/github_token").trim()
-			sh "git push https://anastaviki:${github_token}@github.com/YOUR_USERNAME/YOUR_REPOSITORY.git release-$date"
+			sh "git push https://anastaviki:${github_token}@github.com/anastaviki/test.git release-$date"
 
         }
       }
