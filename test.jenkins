@@ -59,7 +59,7 @@ pipeline {
         script {
           def date = new Date().format('yyyyMMdd')
           sh "git checkout  release-$date"
-          sh "git push origin release-$date"
+          sh "git push origin release_b-$date"
         }
       }
     }
