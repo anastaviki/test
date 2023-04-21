@@ -35,7 +35,7 @@ pipeline {
 
 		 stage('Run Pytest') {
             steps {
-                sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py --html=report.html '
+                sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py --html=PyTest_HW/PyTest/report.html '
             }
         }
 		
@@ -58,7 +58,7 @@ pipeline {
       steps {
         script {
           def date = new Date().format('yyyyMMdd')
-          sh "git checkout -b release_b-$date"
+          sh "git checkout release_b-$date"
           sh "git push origin release_b-$date"
         }
       }
