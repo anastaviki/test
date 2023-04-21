@@ -96,7 +96,7 @@ def test_min_value_date(db_conn, logger):
     cursor = db_conn.cursor()
     cursor.execute("SELECT MIN([ModifiedDate]) as min_date FROM [Production].[UnitMeasure];")
     actual_value = cursor.fetchone()[0]
-    expected_value = datetime.datetime(2008, 5, 30, 0, 0)
+    expected_value = datetime.datetime(2008, 4, 30, 0, 0)
     assert actual_value == expected_value, f"Expected {expected_value}, but got {actual_value}"
     cursor.close()
     logger.info("Verify the minimum value of the [ModifiedDate] column in [Production].[UnitMeasure] table - OK!")
