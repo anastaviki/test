@@ -58,7 +58,7 @@ pipeline {
       steps {
         script {
           def date = new Date().format('yyyyMMdd')
-          sh "git checkout  release-$date"
+          sh "git checkout -b release_b-$date"
           sh "git push origin release_b-$date"
         }
       }
