@@ -49,8 +49,16 @@ pipeline {
 		
 		stage('Run Robot Framework Tests') {
             steps {
+			script {
+                    try {
+                        sh 'python3 -m robot -d RobotFramework_HW/RF_Tests/tests/ RobotFramework_HW/RF_Tests/tests/'
+                    } catch (err) {
+                        currentBuild.result = 'FAILURE'
+                        error("Robot Framework tests failed with error: ${err}")
+                    }
+                }
 			
-                sh 'python3 -m robot -d RobotFramework_HW/RF_Tests/tests/ RobotFramework_HW/RF_Tests/tests/'
+                
             }
         }
 		stage('Commit and Push Changes') {
