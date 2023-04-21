@@ -35,7 +35,15 @@ pipeline {
 
 		 stage('Run Pytest') {
             steps {
-                sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py --html=PyTest_HW/PyTest/report.html '
+			script {
+                    try {
+                        sh 'python3 -m pytest PyTest_HW/PyTest/test_cases.py --html=PyTest_HW/PyTest/report.html '
+                    } catch (err) {
+                        currentBuild.result = 'FAILURE'
+                        error("Pytest failed with error: ${err}")
+                    }
+                }
+                
             }
         }
 		
