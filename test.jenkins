@@ -42,7 +42,7 @@ pipeline {
 		stage('Run Robot Framework Tests') {
             steps {
 			
-                sh 'python3 -m robot -d reports/ RobotFramework_HW/RF_Tests/tests/'
+                sh 'python3 -m robot -d RobotFramework_HW/RF_Tests/tests/ RobotFramework_HW/RF_Tests/tests/'
             }
         }
 		stage('Commit and Push Changes') {
