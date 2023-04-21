@@ -18,5 +18,5 @@ ${query_max_modified_date}                      SELECT MAX([ModifiedDate]) as ma
 ${query_max_modified_date_result}               2008-04-30 00:00:00
 
 ${query_numbers_with_one_symbol}                SELECT COUNT(*) AS count_values  FROM  [Production].[UnitMeasure] WHERE LEN([UnitMeasureCode])=1;
-${query_numbers_with_one_symbol_result}         4
+${query_numbers_with_one_symbol_result}         5
 
