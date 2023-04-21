@@ -4,24 +4,11 @@ pipeline {
         git 'my-git'
     }
 	environment {
+
         PYTHONPATH = '/var/jenkins_home/.local/lib/python3.9/site-packages'
     }
     stages {
-	stage('Check Pull Requests') {
-  steps {
-    script {
-      def prs = git.pollChanges().findAll {
-        it.getBranches().any { branch ->
-          branch.name.contains('pull') && branch.name.contains('/feature-')
-        }
-      }
-      if (prs.isEmpty()) {
-        currentBuild.result = 'ABORTED'
-        error('No pull requests found')
-      }
-    }
-  }
-}
+
 
 	stage('Inst') {
             steps {
@@ -30,7 +17,10 @@ pipeline {
         }
 	stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/anastaviki/test.git'
+                git branch: 'develop', url: 'https://github.com/anastaviki/test.git'
+				sh 'git remote -v'
+				sh 'git config --global --list'
+
             }
         }
 
@@ -55,5 +45,23 @@ pipeline {
                 sh 'python3 -m robot -d reports/ RobotFramework_HW/RF_Tests/tests/'
             }
         }
+		stage('Commit and Push Changes') {
+  steps {
+    script {
+      sh 'git add .'
+      sh 'git commit -m "Commit message for release branch"'
+      sh 'git push origin develop'
+    }
+  }
+}
+		 stage('Move to Release Branch') {
+      steps {
+        script {
+          def date = new Date().format('yyyyMMdd')
+          sh "git checkout  release-$date"
+          sh "git push origin release-$date"
+        }
+      }
+    }
     }
 }
