@@ -50,7 +50,7 @@ pipeline {
     script {
       sh 'git add .'
       sh 'git commit -m "Commit message for release branch"'
-      sh 'git push'
+      sh 'git push origin develop'
     }
   }
 }
